@@ -68,7 +68,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, div, button {
 }
 
 .info-label {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.4);
     text-transform: uppercase;
@@ -76,7 +76,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, div, button {
 }
 
 .info-value {
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     font-weight: 600;
     color: rgba(9, 186, 242, 0.85);
     text-shadow: 0 0 8px rgba(9, 186, 242, 0.3);
