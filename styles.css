@@ -690,6 +690,17 @@ header {
 }
 
 @media (max-width: 480px) {
+    .team-title {
+        font-size: 1.2rem;
+        letter-spacing: 0.01em;
+        margin-bottom: 2rem;
+    }
+    
+    .team-section {
+        padding: 5rem 1rem;
+        margin-top: 6rem;
+    }
+    
     .mission-section {
         padding: 5rem 1.5rem;
     }
@@ -706,6 +717,11 @@ header {
     .core-text {
         font-size: 2rem;
         letter-spacing: 0.1em;
+    }
+    
+    .info-bar {
+        gap: 1rem;
+        padding: 0.75rem 1rem;
     }
 }
 
@@ -785,8 +801,9 @@ header {
         0 0 30px var(--neon-glow),
         0 0 45px rgba(9, 186, 242, 0.4);
     margin-bottom: 6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-transform: none;
+    line-height: 1.4;
 }
 
 .team-content {
@@ -1034,6 +1051,18 @@ footer {
 }
 
 @media (max-width: 768px) {
+    .team-title {
+        font-size: 1.5rem;
+        letter-spacing: 0.02em;
+        margin-bottom: 3rem;
+        line-height: 1.3;
+    }
+    
+    .team-section {
+        padding: 6rem 1.5rem;
+        margin-top: 8rem;
+    }
+    
     header {
         top: 15px;
     }
