@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particle Network Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #020208;
+            font-family: monospace;
+        }
+        #wave-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .test-info {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: #00FF00;
+            font-size: 18px;
+            z-index: 100;
+            background: rgba(0,0,0,0.8);
+            padding: 20px;
+            border: 2px solid #00FF00;
+        }
+    </style>
+</head>
+<body>
+    <div id="wave-background"></div>
+    <div class="test-info">
+        <h2>PARTICLE NETWORK TEST</h2>
+        <p>✓ This page loaded successfully</p>
+        <p>✓ Open DevTools (F12) and check Console tab</p>
+        <p>✓ You should see BRIGHT MAGENTA CIRCLES</p>
+        <p>✓ Look for console messages starting with "WAVES.JS LOADED"</p>
+    </div>
+    
+    <script src="waves.js"></script>
+</body>
+</html>

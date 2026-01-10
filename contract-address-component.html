@@ -1,0 +1,238 @@
+<!-- Token Contract Address Component -->
+<!-- Add this to your page where you want the contract address to appear -->
+
+<div class="contract-address-container">
+    <div class="contract-address-pill">
+        <span class="contract-address-text" id="contractAddress">CYRO TEST</span>
+        <button class="copy-button" id="copyButton" aria-label="Copy contract address to clipboard">
+            <span class="copy-button-text">COPY</span>
+        </button>
+    </div>
+</div>
+
+<style>
+/* Token Contract Address Component Styles */
+.contract-address-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.contract-address-pill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+    border-radius: 50px;
+    padding: 16px 20px 16px 32px;
+    box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    gap: 16px;
+    transition: all 0.3s ease;
+}
+
+.contract-address-pill:hover {
+    box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.08),
+        0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.contract-address-text {
+    flex: 1;
+    font-family: 'Courier New', Consolas, Monaco, monospace;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a2e;
+    letter-spacing: 0.5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    user-select: all;
+    -webkit-user-select: all;
+    -moz-user-select: all;
+}
+
+.copy-button {
+    background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 28px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 
+        0 2px 8px rgba(15, 52, 96, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.copy-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.copy-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 
+        0 4px 12px rgba(15, 52, 96, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.copy-button:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 2px 4px rgba(15, 52, 96, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.copy-button:focus-visible {
+    outline: 3px solid #09BAF2;
+    outline-offset: 2px;
+}
+
+.copy-button.copied {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    animation: successPulse 0.4s ease;
+}
+
+.copy-button.copied::before {
+    width: 300px;
+    height: 300px;
+}
+
+@keyframes successPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .contract-address-pill {
+        padding: 14px 16px 14px 24px;
+        gap: 12px;
+    }
+    
+    .contract-address-text {
+        font-size: 14px;
+        max-width: 180px;
+    }
+    
+    .copy-button {
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .contract-address-text {
+        max-width: 120px;
+    }
+}
+</style>
+
+<script>
+// Token Contract Address Copy Functionality
+(function() {
+    const copyButton = document.getElementById('copyButton');
+    const contractAddress = document.getElementById('contractAddress');
+    const buttonText = copyButton.querySelector('.copy-button-text');
+    
+    let isAnimating = false;
+    
+    async function copyToClipboard() {
+        if (isAnimating) return;
+        
+        const addressText = contractAddress.textContent;
+        
+        try {
+            // Modern Clipboard API
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(addressText);
+                showSuccess();
+            } 
+            // Fallback for older browsers
+            else {
+                const textArea = document.createElement('textarea');
+                textArea.value = addressText;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    showSuccess();
+                } catch (err) {
+                    console.error('Fallback copy failed:', err);
+                    showError();
+                } finally {
+                    document.body.removeChild(textArea);
+                }
+            }
+        } catch (err) {
+            console.error('Failed to copy:', err);
+            showError();
+        }
+    }
+    
+    function showSuccess() {
+        isAnimating = true;
+        buttonText.textContent = 'COPIED!';
+        copyButton.classList.add('copied');
+        
+        setTimeout(() => {
+            buttonText.textContent = 'COPY';
+            copyButton.classList.remove('copied');
+            isAnimating = false;
+        }, 1200);
+    }
+    
+    function showError() {
+        isAnimating = true;
+        buttonText.textContent = 'ERROR';
+        
+        setTimeout(() => {
+            buttonText.textContent = 'COPY';
+            isAnimating = false;
+        }, 1200);
+    }
+    
+    // Click event
+    copyButton.addEventListener('click', copyToClipboard);
+    
+    // Keyboard accessibility
+    copyButton.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            copyToClipboard();
+        }
+    });
+})();
+</script>
