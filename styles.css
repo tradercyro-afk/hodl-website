@@ -767,6 +767,40 @@ header {
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
+/* Team Section */
+.team-section {
+    padding: 10rem 2rem;
+    margin-top: 12rem;
+    background-color: transparent;
+    text-align: center;
+}
+
+.team-title {
+    font-size: 2.5rem;
+    font-weight: 400;
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon);
+    text-shadow: 
+        0 0 15px var(--neon-glow-strong),
+        0 0 30px var(--neon-glow),
+        0 0 45px rgba(9, 186, 242, 0.4);
+    margin-bottom: 6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.team-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.team-content p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: rgba(9, 186, 242, 0.95);
+    text-shadow: 0 0 8px rgba(9, 186, 242, 0.3);
+}
+
 /* Chart Section */
 .chart-section {
     padding: 10rem 2rem;
