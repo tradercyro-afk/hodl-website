@@ -194,6 +194,7 @@ header {
 .pill-nav a {
     color: #09BAF2;
     text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
     font-weight: 500;
     font-size: 0.875rem;
     text-transform: uppercase;
@@ -812,25 +813,24 @@ header {
 }
 
 .carousel-btn {
-    background: white;
-    border: 2px solid #e0e0e0;
-    color: #3a3a3a;
-    font-size: 2rem;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: #09BAF2;
+    font-size: 5rem;
     cursor: pointer;
     transition: all 0.3s;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    padding: 0;
+    text-shadow: 0 0 10px rgba(9, 186, 242, 0.6);
 }
 
 .carousel-btn:hover {
-    background: #3a3a3a;
-    color: white;
-    transform: scale(1.1);
+    color: var(--neon);
+    text-shadow: 0 0 20px rgba(9, 186, 242, 0.9);
+    transform: scale(1.2);
 }
 
 /* Socials Section */
