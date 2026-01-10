@@ -311,7 +311,7 @@ header {
 /* About Section */
 .about-section {
     padding: 4rem 2rem;
-    margin-top: 24rem;
+    margin-top: 12rem;
     background-color: transparent;
     position: relative;
 }
@@ -522,7 +522,7 @@ header {
 /* Mission Section */
 .mission-section {
     padding: 10rem 2rem;
-    margin-top: 24rem;
+    margin-top: 12rem;
     background-color: transparent;
     text-align: center;
 }
@@ -711,7 +711,7 @@ header {
 /* Memes Section */
 .memes-section {
     padding: 5rem 2rem;
-    margin-top: 24rem;
+    margin-top: 12rem;
     background-color: transparent;
 }
 
@@ -769,7 +769,7 @@ header {
 /* Chart Section */
 .chart-section {
     padding: 10rem 2rem;
-    margin-top: 24rem;
+    margin-top: 12rem;
     background-color: transparent;
     text-align: center;
 }
@@ -836,7 +836,7 @@ header {
 /* Socials Section */
 .socials-section {
     padding: 5rem 2rem;
-    margin-top: 24rem;
+    margin-top: 12rem;
     background-color: transparent;
     text-align: center;
 }
