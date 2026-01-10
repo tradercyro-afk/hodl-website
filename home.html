@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HODL - Your cryptocurrency companion">
+    <title>HODL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Animated Wave Background -->
+    <div id="wave-background"></div>
+    
+    <!-- Main Content Wrapper -->
+    <div class="content-wrapper">
+    <header>
+        <nav class="pill-nav">
+            <a href="#home">HOME</a>
+            <a href="#about">ABOUT</a>
+            <a href="#memes">MEMES</a>
+            <div class="logo-button">
+                <a href="index.html">
+                    <img src="HODL logo png.png" alt="HODL Logo">
+                </a>
+            </div>
+            <a href="#chart">CHART</a>
+            <a href="#socials">JOIN COMMUNITY</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="home-section">
+            <div class="hero-content">
+                <img src="HODL logo png.png" alt="HODL Logo" class="hero-logo">
+                <h1 class="holder-text">JOIN <span class="holder-count" id="holderCount">---</span> DIAMOND HANDS</h1>
+                
+                <!-- Horizontal Info Bar -->
+                <div class="info-bar">
+                    <div class="info-item" data-full-address="5QTuvtRZE3BAc6FrjUMf6yzx6D4HJpLzcRPgrANRVu2X">
+                        <span class="info-label">CA</span>
+                        <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-tooltip">Copied!</span>
+                    </div>
+                    <div class="info-separator"></div>
+                    <div class="info-item">
+                        <span class="info-label">MCAP</span>
+                        <span class="info-value" id="mcap">---</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <h2 class="about-title">ABOUT HODL</h2>
+            
+            <div class="about-cards-container">
+                <!-- Card 1: Top-right image with text on left -->
+                <div class="about-card card-1">
+                    <div class="card-text">
+                        <p>On December 18, 2013, during one of Bitcoin's earliest violent market swings, a frustrated trader posted a now-legendary message titled "I AM HODLING." It was a drunken typo - but the message behind it was crystal clear.</p>
+                        <p>While markets crashed and panic spread, he chose conviction over fear.</p>
+                    </div>
+                    <div class="card-image">
+                        <img src="p1.png" alt="Diamond Hands">
+                    </div>
+                </div>
+                
+                <!-- Card 2: Middle-left image with text on right -->
+                <div class="about-card card-2">
+                    <div class="card-image">
+                        <img src="p3.png" alt="HODL Resilience">
+                    </div>
+                    <div class="card-text">
+                        <p>HODL became the rallying cry of those who refused to sell the future for short-term comfort. A declaration that time, patience, and conviction would outlast volatility.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 3: Bottom-right image with text on left -->
+                <div class="about-card card-3">
+                    <div class="card-text">
+                        <p>HODL became the shared language of long-term believers, a reminder that the strongest position is often the one that doesn't move. Through every cycle, the principle stayed intact: patience beats panic.</p>
+                    </div>
+                    <div class="card-image">
+                        <img src="search light.gif" alt="Never Let Go">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mission" class="mission-section">
+            <div class="container">
+                <h2 class="mission-title">Our Mission</h2>
+                <div class="mission-content">
+                    <div class="mission-statement">
+                        <p class="statement-text">Revive OG crypto culture</p>
+                    </div>
+                    <div class="mission-divider"></div>
+                    <div class="mission-statement">
+                        <p class="statement-text">Make bag holding honorable again</p>
+                    </div>
+                    <div class="mission-core">
+                        <p class="core-text"><span class="just-text">Just</span> <span class="hodl-text">$HODL</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="socials" class="socials-section">
+            <div class="container">
+                <h2 class="socials-title">Socials</h2>
+                <div class="socials-content">
+                    <ul class="socials-list">
+                        <li><span class="social-label">X:</span> <a href="https://x.com/theHODLmeme" target="_blank" class="social-link">theHODLmeme</a></li>
+                        <li><span class="social-label">X COMMUNITY:</span> <a href="https://x.com/i/communities/2009973182229283181" target="_blank" class="social-link">HODL</a></li>
+                        <li><span class="social-label">TG:</span></li>
+                        <li><span class="social-label">DEXSCREENER:</span></li>
+                        <li><a href="https://knowyourmeme.com/memes/hodl" target="_blank" class="social-link">knowyourmeme.com/memes/hodl</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="memes" class="memes-section">
+            <div class="container">
+                <h2>MEMES</h2>
+                <div class="carousel-container">
+                    <button class="carousel-btn prev" onclick="moveCarousel(-1)">‹</button>
+                    <div class="carousel">
+                        <div class="carousel-track">
+                            <div class="carousel-item"><img src="Memes/content.png" alt="Meme 1"></div>
+                            <div class="carousel-item"><img src="Memes/content3.png" alt="Meme 2"></div>
+                            <div class="carousel-item"><img src="Memes/ChatGPT_Image_Jan_10_2026_01_09_30_PM.png" alt="Meme 3"></div>
+                            <div class="carousel-item"><img src="Memes/ChatGPT_Image_Jan_10_2026_11_21_04_AM.png" alt="Meme 4"></div>
+                            <div class="carousel-item"><img src="Memes/G-AdYjXXIAAqSTV.png" alt="Meme 5"></div>
+                            <div class="carousel-item"><img src="Memes/G-BGJkjWAAAPOvp.png" alt="Meme 6"></div>
+                            <div class="carousel-item"><img src="Memes/G-GI3DeWcAApqxz.png" alt="Meme 7"></div>
+                            <div class="carousel-item"><img src="Memes/G5fILGYXcAAlisL.png" alt="Meme 8"></div>
+                            <div class="carousel-item"><img src="Memes/G5wo42rWsAAScrG.png" alt="Meme 9"></div>
+                            <div class="carousel-item"><img src="Memes/GwyldEWXMAALhsg.png" alt="Meme 10"></div>
+                            <div class="carousel-item"><img src="Memes/GyJ24LyWwAAkhSH.png" alt="Meme 11"></div>
+                        </div>
+                    </div>
+                    <button class="carousel-btn next" onclick="moveCarousel(1)">›</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="chart" class="chart-section">
+            <div class="container">
+                <h2 class="chart-title">CHART</h2>
+                <div class="chart-content">
+                    <iframe 
+                        id="dexscreener-embed" 
+                        src="https://dexscreener.com/solana/5QTuvtRZE3BAc6FrjUMf6yzx6D4HJpLzcRPgrANRVu2X?embed=1&theme=dark&trades=0&info=0" 
+                        style="width: 100%; height: 600px; border: 2px solid rgba(9, 186, 242, 0.4); border-radius: 12px; box-shadow: 0 0 30px rgba(9, 186, 242, 0.3);">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    </div><!-- End content-wrapper -->
+
+    <script src="script.js"></script>
+    <script src="waves.js"></script>
+</body>
+</html>
