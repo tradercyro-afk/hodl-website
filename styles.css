@@ -936,6 +936,12 @@ header {
 
 .social-label {
     display: inline-block;
+    font-size: 1.4rem;
+    line-height: 2.5;
+    color: rgba(9, 186, 242, 0.85);
+    text-shadow: 0 0 8px rgba(9, 186, 242, 0.3);
+    font-weight: 400;
+    letter-spacing: 0.05em;
 }
 
 .social-link {
