@@ -18,19 +18,91 @@
     <!-- Main Content Wrapper -->
     <div class="content-wrapper">
     <header>
-        <nav class="pill-nav">
-            <a href="#home">HOME</a>
-            <a href="#about">ABOUT</a>
-            <a href="#memes">MEMES</a>
-            <div class="logo-button">
-                <a href="index.html">
-                    <img src="HODL logo png.png" alt="HODL Logo">
+        <div class="gem-header">
+            <!-- Left pill segment -->
+            <nav class="nav-pill nav-pill--left">
+                <!-- SVG outline for left trapezium - open on right side -->
+                <svg class="nav-outline" viewBox="0 0 1000 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Trapezium outline without right vertical edge -->
+                    <path 
+                        d="M 0,44 L 0,156 L 120,200 L 1000,200 L 1000,0 L 120,0 Z" 
+                        fill="none" 
+                        stroke="#09BAF2" 
+                        stroke-width="2"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        vector-effect="non-scaling-stroke"
+                    />
+                </svg>
+                <a href="#home">HOME</a>
+                <a href="#about">ABOUT</a>
+                <a href="#memes">MEMES</a>
+            </nav>
+            
+            <!-- Center diamond badge with SVG gemstone outline -->
+            <div class="nav-center">
+                <a href="index.html" class="diamond-badge">
+                    <!-- SVG with gemstone diamond outline and dark fill -->
+                    <svg class="diamond-svg" viewBox="0 0 100 115" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <!-- Clip path for logo -->
+                            <clipPath id="diamond-clip">
+                                <polygon points="18,22 82,22 100,45 50,110 0,45"/>
+                            </clipPath>
+                            <!-- Glow filter matching header -->
+                            <filter id="diamond-glow" x="-100%" y="-100%" width="300%" height="300%">
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
+                                <feComponentTransfer in="blur">
+                                    <feFuncA type="linear" slope="2"/>
+                                </feComponentTransfer>
+                                <feMerge>
+                                    <feMergeNode in="blur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Dark interior fill (matches nav background) -->
+                        <polygon 
+                            points="18,22 82,22 100,45 50,110 0,45" 
+                            fill="#020208"
+                        />
+                        
+                        <!-- Gemstone outline stroke with glow -->
+                        <polygon 
+                            points="18,22 82,22 100,45 50,110 0,45" 
+                            fill="none" 
+                            stroke="#09BAF2" 
+                            stroke-width="2"
+                            filter="url(#diamond-glow)"
+                        />
+                    </svg>
+                    
+                    <!-- Logo clipped to diamond shape using SVG clipPath -->
+                    <img src="HODL logo png.png" alt="HODL Logo" class="diamond-logo">
                 </a>
             </div>
-            <a href="#mission">MISSION</a>
-            <a href="#chart">CHART</a>
-            <a href="#socials">COMMUNITY</a>
-        </nav>
+            
+            <!-- Right pill segment -->
+            <nav class="nav-pill nav-pill--right">
+                <!-- SVG outline for right trapezium - open on left side -->
+                <svg class="nav-outline" viewBox="0 0 1000 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Trapezium outline without left vertical edge -->
+                    <path 
+                        d="M 1000,156 L 1000,44 L 880,0 L 0,0 L 0,200 L 880,200 Z" 
+                        fill="none" 
+                        stroke="#09BAF2" 
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        vector-effect="non-scaling-stroke"
+                    />
+                </svg>
+                <a href="#mission">MISSION</a>
+                <a href="#chart">CHART</a>
+                <a href="#socials">COMMUNITY</a>
+            </nav>
+        </div>
     </header>
 
     <main>
@@ -99,15 +171,12 @@
             <div class="container">
                 <h2 class="mission-title">Our Mission</h2>
                 <div class="mission-content">
-                    <div class="mission-statement">
-                        <p class="statement-text">Revive OG crypto culture</p>
-                    </div>
-                    <div class="mission-divider"></div>
-                    <div class="mission-statement">
-                        <p class="statement-text">Make bag holding honorable again</p>
-                    </div>
-                    <div class="mission-core">
-                        <p class="core-text"><span class="just-text">Just</span> <span class="hodl-text">$HODL</span></p>
+                    <div class="mission-stack">
+                        <p class="mission-line statement-text">HONOUR OG MEME CULTURE</p>
+                        <div class="mission-diamond"></div>
+                        <p class="mission-line statement-text">Make HODLing great again</p>
+                        <div class="mission-diamond"></div>
+                        <p class="mission-line core-text"><span class="just-text">Just</span> <span class="hodl-text">$HODL</span></p>
                     </div>
                 </div>
             </div>

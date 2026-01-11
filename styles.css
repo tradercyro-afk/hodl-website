@@ -36,6 +36,8 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, div, button {
     --bg-dark: #020208;
     --panel-bg: rgba(0, 0, 0, 0.35);
     --panel-border: rgba(9, 186, 242, 0.4);
+    --slope: 52px; /* Trapezium horizontal angle inset */
+    --cutY: 22%; /* Trapezium vertical angle position */
 }
 
 /* Horizontal Info Bar */
@@ -119,6 +121,48 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, div, button {
     background: rgba(255, 255, 255, 0.1);
 }
 
+/* Glowing Enter Text */
+.enter-text {
+    font-size: 2rem;
+    font-weight: 600;
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    margin-top: 4rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 
+        0 0 10px var(--neon-glow),
+        0 0 20px var(--neon-glow),
+        0 0 30px rgba(9, 186, 242, 0.4);
+    animation: enterPulse 2s ease-in-out infinite;
+}
+
+.enter-text:hover {
+    color: #FFD700;
+    text-shadow: 
+        0 0 15px rgba(255, 215, 0, 0.8),
+        0 0 30px rgba(255, 215, 0, 0.6),
+        0 0 45px rgba(255, 215, 0, 0.4);
+    transform: scale(1.05);
+}
+
+@keyframes enterPulse {
+    0%, 100% {
+        text-shadow: 
+            0 0 10px var(--neon-glow),
+            0 0 20px var(--neon-glow),
+            0 0 30px rgba(9, 186, 242, 0.4);
+    }
+    50% {
+        text-shadow: 
+            0 0 15px var(--neon-glow-strong),
+            0 0 30px var(--neon-glow),
+            0 0 45px rgba(9, 186, 242, 0.5);
+    }
+}
+
 @media (max-width: 768px) {
     .info-bar {
         flex-wrap: wrap;
@@ -169,75 +213,259 @@ header {
     padding: 0 20px;
 }
 
-/* CHANGED: Removed diamond-pointed ends, clean rectangular header */
-.pill-nav {
+/* ===========================
+   GEMSTONE DIAMOND HEADER
+   SVG ENCLOSED DIAMOND OUTLINE
+   =========================== */
+
+/* Main header container - three columns with gap for diamond */
+.gem-header {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    background: #020208;
-    border-radius: 8px; /* Simple rounded corners instead of diamond points */
-    padding: 0 60px;
-    height: 70px;
-    border: 2px solid #09BAF2;
-    gap: 40px;
+    justify-content: center;
+    gap: 12px; /* ADJUST THIS: Gap between pill halves and diamond */
     max-width: 1100px;
     width: auto;
     position: relative;
-    
-    /* REMOVED: clip-path polygon that created diamond ends */
-    
-    /* Neon cyan glow effect */
-    filter: drop-shadow(0 0 15px rgba(9, 186, 242, 0.6)) 
-            drop-shadow(0 0 30px rgba(9, 186, 242, 0.3));
 }
 
-.pill-nav a {
-    color: #09BAF2;
+/* Navigation pill segments (left and right) */
+.nav-pill {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    background: transparent; /* Background now on ::before */
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    padding: 20px 40px;
+    height: 70px;
+    position: relative;
+    filter: none !important; /* No filter on wrapper; glow only on SVG */
+    overflow: visible; /* Allow SVG glow to extend beyond panel */
+    background-clip: border-box !important;
+}
+
+/* Left pill - trapezium left end, straight right edge */
+.nav-pill--left {
+    padding-right: 50px;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    position: relative;
+    width: 380px;
+    justify-content: flex-end;
+    /* clip-path removed - only fill (::before) should be clipped, not stroke */
+}
+
+/* Dark background fill with explicit trapezium clip-path */
+.nav-pill--left::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-dark);
+    clip-path: polygon(
+        var(--slope) 0,
+        100% 0,
+        100% 100%,
+        var(--slope) 100%,
+        0 calc(100% - var(--cutY)),
+        0 var(--cutY)
+    );
+    z-index: 0;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+/* Right pill - straight left edge, trapezium right end */
+.nav-pill--right {
+    padding-left: 50px;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    position: relative;
+    width: 380px;
+    justify-content: flex-start;
+    /* clip-path removed - only fill (::before) should be clipped, not stroke */
+}
+
+/* Dark background fill with explicit trapezium clip-path */
+.nav-pill--right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-dark);
+    clip-path: polygon(
+        0 0,
+        calc(100% - var(--slope)) 0,
+        100% var(--cutY),
+        100% calc(100% - var(--cutY)),
+        calc(100% - var(--slope)) 100%,
+        0 100%
+    );
+    z-index: 0;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+/* ::after removed - outline now drawn by SVG polygon */
+
+/* Navigation link styling */
+.nav-pill a {
+    color: var(--neon);
     text-decoration: none;
     font-family: 'Orbitron', sans-serif;
     font-weight: 500;
     font-size: 0.875rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
     white-space: nowrap;
-}
-
-.pill-nav a:hover {
-    color: #7e9db6;
-}
-
-/* CHANGED: Circle to Diamond Shape */
-.logo-button {
-    width: 90px;
-    height: 90px;
-    border-radius: 0; /* Removed circular border-radius */
-    background: #020208;
-    border: 1px solid #09BAF2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+    text-shadow: 0 0 8px rgba(9, 186, 242, 0.2);
     position: relative;
-    margin: 0 10px;
-    transform: rotate(45deg); /* Rotate square to create diamond */
-    box-shadow: 0 0 20px rgba(9, 186, 242, 0.5); /* Neon cyan glow */
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    z-index: 3; /* Above fill (0) and stroke (2) */
 }
 
-/* CHANGED: Hover effect for diamond */
-.logo-button:hover {
-    box-shadow: 0 0 30px rgba(9, 186, 242, 0.8); /* Increased glow on hover */
-    transform: rotate(45deg) scale(1.03); /* Subtle scale-up */
+/* SVG polygon outline overlay - NOT clipped, renders complete trapezium */
+.nav-outline {
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: calc(100% + 6px);
+    height: calc(100% + 6px);
+    pointer-events: none;
+    z-index: 2; /* Above fill (0) and same as links (2) for visibility */
+    overflow: visible;
+    opacity: 1;
+    display: block;
+    shape-rendering: geometricPrecision; /* Crisp edges, no anti-aliasing artifacts */
+    filter: drop-shadow(0 0 15px var(--neon-glow)) 
+            drop-shadow(0 0 30px rgba(9, 186, 242, 0.3));
 }
 
-/* CHANGED: Rotate logo back to upright position */
-.logo-button img {
-    width: 65px;
-    height: 65px;
+.nav-pill:hover .nav-outline {
+    filter: drop-shadow(0 0 20px var(--neon-glow-strong)) 
+            drop-shadow(0 0 35px rgba(9, 186, 242, 0.5));
+}
+
+.nav-pill a:hover {
+    color: #FFD700; /* Gold highlight on hover */
+    text-shadow: 0 0 15px var(--neon-glow-strong);
+}
+
+/* Debug utility - toggle fill to solid color to confirm no gradient seam */
+.debug-no-fill::before {
+    background: #FF0000 !important; /* Bright red for debugging */
+}
+
+/* ===========================
+   CENTER GEMSTONE DIAMOND
+   =========================== */
+
+/* Diamond center container - ADJUST WIDTH/HEIGHT to resize diamond */
+.nav-center {
+    width: 150px;  /* INCREASED: Was 110px, now 36% larger */
+    height: 170px; /* INCREASED: Was 126px, now 36% larger */
+    position: relative;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+/* Diamond badge wrapper */
+.diamond-badge {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* SVG containing diamond outline and fill */
+.diamond-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none; /* Allow clicks to pass through to link */
+    
+    /* Additional CSS glow matching the header pills exactly */
+    filter: drop-shadow(0 0 15px var(--neon-glow)) 
+            drop-shadow(0 0 30px rgba(9, 186, 242, 0.3));
+}
+
+/* Enhanced glow on hover */
+.diamond-badge:hover .diamond-svg {
+    filter: drop-shadow(0 0 20px var(--neon-glow-strong)) 
+            drop-shadow(0 0 35px rgba(9, 186, 242, 0.5));
+}
+
+/* Logo image - clipped using SVG clipPath */
+.diamond-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 47%; /* REDUCED: Was 55%, now 47% to prevent top clipping */
+    height: 47%; /* REDUCED: Was 55%, now 47% to prevent top clipping */
     object-fit: contain;
-    transform: rotate(-45deg); /* Counter-rotate to keep logo upright */
+    z-index: 2;
+    
+    /* Apply SVG clip-path to constrain logo within diamond */
+    clip-path: url(#diamond-clip);
 }
+
+/* Hover effect - slight scale */
+.diamond-badge:hover {
+    transform: scale(1.05);
+}
+
+/* ===========================
+   CUSTOMIZATION GUIDE
+   =========================== 
+   
+   TO CHANGE DIAMOND SIZE:
+   - Edit .nav-center width and height
+   - Keep aspect ratio roughly 110:126 for gemstone proportions
+   
+   TO ADJUST DIAMOND SHAPE (gemstone outline):
+   - Edit SVG polygon points in HTML
+   - Format: points="x1,y1 x2,y2 x3,y3 x4,y4 x5,y5"
+   - Current: "18,22 82,22 100,45 50,110 0,45"
+     * 18,22 = top-left (flat top starts)
+     * 82,22 = top-right (flat top ends)
+     * 100,45 = right shoulder
+     * 50,110 = bottom point
+     * 0,45 = left shoulder
+   
+   TO ADJUST STROKE WIDTH:
+   - Edit stroke-width in SVG polygon (default: 2 to match header border)
+   
+   TO CHANGE STROKE COLOR:
+   - Edit stroke="#09BAF2" in SVG polygon
+   - Or use stroke="var(--neon)" if you want to use CSS variable
+   
+   TO ADJUST GLOW STRENGTH:
+   - Edit SVG filter feGaussianBlur stdDeviation (higher = more blur)
+   - Edit .diamond-svg filter drop-shadow blur values
+   
+   TO ADJUST GAP BETWEEN PILLS AND DIAMOND:
+   - Edit .gem-header gap property
+   
+   TO CHANGE LOGO IMAGE:
+   - Replace "HODL logo png.png" src in HTML
+   
+   TO ADJUST LOGO SIZE INSIDE DIAMOND:
+   - Edit .diamond-logo width and height percentages
+   - Lower % = smaller logo with more padding from edges
+   
+   TO CHANGE DARK INTERIOR COLOR:
+   - Edit fill="#020208" in the first SVG polygon
+   
+*/
 
 /* Home Section */
 .home-section {
@@ -547,9 +775,35 @@ header {
     margin: 0 auto;
 }
 
-/* Mission Statements */
-.mission-statement {
-    margin: 4rem 0;
+/* Mission Stack - Vertical centered layout */
+.mission-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4.5rem;
+}
+
+/* Mission text lines */
+.mission-line {
+    text-align: center;
+}
+
+/* Diamond separator */
+.mission-diamond {
+    width: 44px;
+    height: 50px;
+    background: var(--neon);
+    clip-path: polygon(
+        18% 19.1%,
+        82% 19.1%,
+        100% 39.1%,
+        50% 95.7%,
+        0% 39.1%
+    );
+    box-shadow: 
+        0 0 20px var(--neon-glow),
+        0 0 40px rgba(9, 186, 242, 0.5),
+        inset 0 0 10px rgba(9, 186, 242, 0.3);
 }
 
 .statement-text {
@@ -563,42 +817,6 @@ header {
     text-transform: uppercase;
 }
 
-/* Subtle Dividers */
-.mission-divider {
-    width: 60px;
-    height: 1px;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(9, 186, 242, 0.4) 50%, 
-        transparent 100%);
-    margin: 3rem auto;
-    box-shadow: 0 0 8px rgba(9, 186, 242, 0.2);
-}
-
-/* Core Philosophy - "Just HODL" */
-.mission-core {
-    margin-top: 6rem;
-    padding-top: 4rem;
-    position: relative;
-}
-
-.mission-core::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 1px;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        var(--neon) 50%, 
-        transparent 100%);
-    box-shadow: 
-        0 0 15px var(--neon-glow),
-        0 0 30px rgba(9, 186, 242, 0.3);
-}
-
 .core-text {
     font-size: 1.8rem;
     font-weight: 500;
@@ -606,6 +824,7 @@ header {
     margin: 0;
     letter-spacing: 0.3em;
     text-transform: uppercase;
+    white-space: nowrap;
 }
 
 .just-text {
@@ -1022,23 +1241,30 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .pill-nav {
-        padding: 0 30px;
-        gap: 25px;
+    .gem-header {
+        gap: 10px;
     }
     
-    .pill-nav a {
+    .nav-pill {
+        gap: 20px;
+        padding: 18px 35px;
+    }
+    
+    .nav-pill--left {
+        padding-right: 40px;
+    }
+    
+    .nav-pill--right {
+        padding-left: 40px;
+    }
+    
+    .nav-pill a {
         font-size: 0.75rem;
     }
     
-    .logo-button {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .logo-button img {
-        width: 55px;
-        height: 55px;
+    .nav-center {
+        width: 128px;  /* INCREASED: Was 95px, now 36% larger */
+        height: 148px; /* INCREASED: Was 110px, now 36% larger */
     }
     
     .carousel-item {
@@ -1072,27 +1298,41 @@ footer {
         top: 15px;
     }
     
-    .pill-nav {
-        flex-wrap: wrap;
-        height: auto;
-        padding: 20px 25px;
+    /* Stack nav vertically on mobile */
+    .gem-header {
+        flex-direction: column;
         gap: 15px;
+        padding: 20px;
+        background: var(--bg-dark);
+        border: 2px solid var(--neon);
+        border-radius: 25px;
+        filter: drop-shadow(0 0 15px var(--neon-glow));
+    }
+    
+    .nav-pill {
+        border: none;
+        filter: none;
+        padding: 0;
+        height: auto;
+        gap: 12px;
+        flex-wrap: wrap;
         justify-content: center;
     }
     
-    .logo-button {
+    .nav-pill--left,
+    .nav-pill--right {
+        border-radius: 0;
+        padding: 0;
+        background: transparent;
+    }
+    
+    .nav-center {
         order: -1;
-        width: 70px;
-        height: 70px;
-        margin-bottom: 10px;
+        width: 100px;  /* INCREASED: Was 75px, now 33% larger */
+        height: 117px; /* INCREASED: Was 87px, now 35% larger */
     }
     
-    .logo-button img {
-        width: 45px;
-        height: 45px;
-    }
-    
-    .pill-nav a {
+    .nav-pill a {
         font-size: 0.7rem;
     }
     

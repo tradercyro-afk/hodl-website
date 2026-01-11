@@ -5,7 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HODL - Welcome</title>
     <link rel="icon" type="image/png" href="HODL logo png.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --neon: #09BAF2;
+            --neon-glow: rgba(9, 186, 242, 0.6);
+            --neon-glow-strong: rgba(9, 186, 242, 0.8);
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -25,6 +34,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
         }
 
         #landing-video {
@@ -40,7 +50,7 @@
         }
 
         .diamond-overlay {
-            position: absolute;
+            position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -62,10 +72,71 @@
             background: transparent;
             clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
         }
+        
+        /* Glowing Enter Text */
+        .enter-text {
+            position: fixed;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+            font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 
+                0 0 10px var(--neon-glow),
+                0 0 20px var(--neon-glow),
+                0 0 30px rgba(9, 186, 242, 0.4),
+                0 0 40px rgba(9, 186, 242, 0.3),
+                0 0 50px rgba(9, 186, 242, 0.2);
+            animation: enterPulse 2s ease-in-out infinite;
+            z-index: 10;
+            filter: drop-shadow(0 0 20px var(--neon-glow)) 
+                    drop-shadow(0 0 40px rgba(9, 186, 242, 0.4));
+        }
+        
+        .enter-text:hover {
+            color: #FFD700;
+            text-shadow: 
+                0 0 15px rgba(255, 215, 0, 0.8),
+                0 0 30px rgba(255, 215, 0, 0.6),
+                0 0 45px rgba(255, 215, 0, 0.4),
+                0 0 60px rgba(255, 215, 0, 0.3);
+            transform: translateX(-50%) scale(1.05);
+            filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.8)) 
+                    drop-shadow(0 0 50px rgba(255, 215, 0, 0.5));
+        }
+        
+        @keyframes enterPulse {
+            0%, 100% {
+                text-shadow: 
+                    0 0 10px var(--neon-glow),
+                    0 0 20px var(--neon-glow),
+                    0 0 30px rgba(9, 186, 242, 0.4),
+                    0 0 40px rgba(9, 186, 242, 0.3),
+                    0 0 50px rgba(9, 186, 242, 0.2);
+                filter: drop-shadow(0 0 20px var(--neon-glow)) 
+                        drop-shadow(0 0 40px rgba(9, 186, 242, 0.4));
+            }
+            50% {
+                text-shadow: 
+                    0 0 20px var(--neon-glow-strong),
+                    0 0 35px var(--neon-glow),
+                    0 0 50px rgba(9, 186, 242, 0.5),
+                    0 0 65px rgba(9, 186, 242, 0.4),
+                    0 0 80px rgba(9, 186, 242, 0.3);
+                filter: drop-shadow(0 0 30px var(--neon-glow-strong)) 
+                        drop-shadow(0 0 60px rgba(9, 186, 242, 0.5));
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="video-container">
+    <div class="video-container" onclick="goToHome()">
         <video id="landing-video" autoplay muted loop playsinline>
             <source src="animation vid.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -75,6 +146,9 @@
         <div class="diamond-overlay" onclick="goToHome()">
             <div class="diamond-shape"></div>
         </div>
+        
+        <!-- Glowing Enter Text -->
+        <div class="enter-text" onclick="goToHome()">ENTER</div>
     </div>
 
     <script>
