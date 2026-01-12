@@ -507,6 +507,7 @@ header {
     font-family: 'Orbitron', sans-serif;
     color: #09BAF2;
     letter-spacing: 0.02em;
+    text-align: center;
     text-shadow: 
         0 0 5px rgba(9, 186, 242, 0.4),
         0 0 10px rgba(9, 186, 242, 0.3),
@@ -1165,8 +1166,8 @@ header {
     display: inline-block;
     font-size: 1.4rem;
     line-height: 2.5;
-    color: rgba(9, 186, 242, 0.85);
-    text-shadow: 0 0 8px rgba(9, 186, 242, 0.3);
+    color: rgba(9, 186, 242, 0.5); /* Darker blue - reduced opacity from 0.85 to 0.5 */
+    text-shadow: 0 0 8px rgba(9, 186, 242, 0.2);
     font-weight: 400;
     letter-spacing: 0.05em;
 }
@@ -1174,8 +1175,8 @@ header {
 .social-link {
     font-size: 1.4rem;
     line-height: 2.5;
-    color: rgba(9, 186, 242, 0.85);
-    text-shadow: 0 0 8px rgba(9, 186, 242, 0.3);
+    color: #09BAF2; /* Lighter blue - full neon cyan */
+    text-shadow: 0 0 10px rgba(9, 186, 242, 0.5);
     font-weight: 400;
     letter-spacing: 0.05em;
     text-decoration: none;
