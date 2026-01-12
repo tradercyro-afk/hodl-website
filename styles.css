@@ -220,10 +220,10 @@ header {
 
 /* Main header container - three columns with gap for diamond */
 .gem-header {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: center;
-    gap: 12px; /* ADJUST THIS: Gap between pill halves and diamond */
+    column-gap: 48px; /* Single source of truth for inner gaps */
     max-width: 1100px;
     width: auto;
     position: relative;
@@ -248,13 +248,15 @@ header {
 
 /* Left pill - trapezium left end, straight right edge */
 .nav-pill--left {
-    padding-right: 50px;
+    padding: 20px 40px;
     border: 0 !important;
     outline: 0 !important;
     box-shadow: none !important;
     position: relative;
-    width: 380px;
+    width: fit-content;
     justify-content: flex-end;
+    justify-self: end;
+    margin-right: 0;
     /* clip-path removed - only fill (::before) should be clipped, not stroke */
 }
 
@@ -280,13 +282,15 @@ header {
 
 /* Right pill - straight left edge, trapezium right end */
 .nav-pill--right {
-    padding-left: 50px;
+    padding: 20px 40px;
     border: 0 !important;
     outline: 0 !important;
     box-shadow: none !important;
     position: relative;
-    width: 380px;
+    width: fit-content;
     justify-content: flex-start;
+    justify-self: start;
+    margin-left: 0;
     /* clip-path removed - only fill (::before) should be clipped, not stroke */
 }
 
@@ -331,10 +335,10 @@ header {
 /* SVG polygon outline overlay - NOT clipped, renders complete trapezium */
 .nav-outline {
     position: absolute;
-    top: -3px;
-    left: -3px;
-    width: calc(100% + 6px);
-    height: calc(100% + 6px);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     z-index: 2; /* Above fill (0) and same as links (2) for visibility */
     overflow: visible;
@@ -364,22 +368,24 @@ header {
    CENTER GEMSTONE DIAMOND
    =========================== */
 
-/* Diamond center container - ADJUST WIDTH/HEIGHT to resize diamond */
+/* Diamond center container - original size */
 .nav-center {
-    width: 150px;  /* INCREASED: Was 110px, now 36% larger */
-    height: 170px; /* INCREASED: Was 126px, now 36% larger */
+    width: 150px;
+    height: 170px;
     position: relative;
     flex-shrink: 0;
+    justify-self: center;
     z-index: 10;
 }
 
-/* Diamond badge wrapper */
+/* Diamond badge wrapper - NO clipping on this layer */
 .diamond-badge {
     display: block;
     width: 100%;
     height: 100%;
     position: relative;
     transition: all 0.3s ease;
+    /* NO clip-path or overflow:hidden here - stroke must be visible */
 }
 
 /* SVG containing diamond outline and fill */
@@ -390,9 +396,7 @@ header {
     width: 100%;
     height: 100%;
     z-index: 1;
-    pointer-events: none; /* Allow clicks to pass through to link */
-    
-    /* Additional CSS glow matching the header pills exactly */
+    pointer-events: none;
     filter: drop-shadow(0 0 15px var(--neon-glow)) 
             drop-shadow(0 0 30px rgba(9, 186, 242, 0.3));
 }
@@ -403,19 +407,24 @@ header {
             drop-shadow(0 0 35px rgba(9, 186, 242, 0.5));
 }
 
-/* Logo image - clipped using SVG clipPath */
-.diamond-logo {
+/* Logo safe area wrapper - inset padding creates breathing room */
+.diamond-logo-wrap {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 47%; /* REDUCED: Was 55%, now 47% to prevent top clipping */
-    height: 47%; /* REDUCED: Was 55%, now 47% to prevent top clipping */
-    object-fit: contain;
+    inset: 20px 28px 32px 28px; /* top right bottom left - more bottom space for diamond taper */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 2;
-    
-    /* Apply SVG clip-path to constrain logo within diamond */
-    clip-path: url(#diamond-clip);
+}
+
+/* Logo image - fits safely within wrapper */
+.diamond-logo {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: translateY(4px) scale(0.88); /* Slight downward shift and safe scale to prevent clipping */
 }
 
 /* Hover effect - slight scale */

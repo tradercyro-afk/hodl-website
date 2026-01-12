@@ -45,10 +45,6 @@
                     <!-- SVG with gemstone diamond outline and dark fill -->
                     <svg class="diamond-svg" viewBox="0 0 100 115" xmlns="http://www.w3.org/2000/svg">
                         <defs>
-                            <!-- Clip path for logo -->
-                            <clipPath id="diamond-clip">
-                                <polygon points="18,22 82,22 100,45 50,110 0,45"/>
-                            </clipPath>
                             <!-- Glow filter matching header -->
                             <filter id="diamond-glow" x="-100%" y="-100%" width="300%" height="300%">
                                 <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
@@ -78,8 +74,10 @@
                         />
                     </svg>
                     
-                    <!-- Logo clipped to diamond shape using SVG clipPath -->
-                    <img src="HODL logo png.png" alt="HODL Logo" class="diamond-logo">
+                    <!-- Logo safe area wrapper with inset padding -->
+                    <div class="diamond-logo-wrap">
+                        <img src="HODL logo png.png" alt="HODL Logo" class="diamond-logo">
+                    </div>
                 </a>
             </div>
             
@@ -113,8 +111,9 @@
                 
                 <!-- Horizontal Info Bar -->
                 <div class="info-bar">
-                    <div class="info-item" data-full-address="5QTuvtRZE3BAc6FrjUMf6yzx6D4HJpLzcRPgrANRVu2X">
+                    <div class="info-item" data-full-address="BbAD1w6UWRnLMu1hUxy5gvZhGwWiBh8JczwuTDtYpump">
                         <span class="info-label">CA</span>
+                        <span class="info-value contract-address">BbAD1w...tYpump</span>
                         <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -189,7 +188,7 @@
                     <ul class="socials-list">
                         <li><span class="social-label">X:</span> <a href="https://x.com/theHODLmeme" target="_blank" class="social-link">theHODLmeme</a></li>
                         <li><span class="social-label">X COMMUNITY:</span> <a href="https://x.com/i/communities/2009973182229283181" target="_blank" class="social-link">HODL</a></li>
-                        <li><span class="social-label">TG:</span></li>
+                        <li><span class="social-label">TG:</span> <a href="https://t.me/+WsbGJZShE9s0ZDg0" target="_blank" class="social-link">HODL COMMUNITY</a></li>
                         <li><span class="social-label">DEXSCREENER:</span></li>
                         <li><a href="https://knowyourmeme.com/memes/hodl" target="_blank" class="social-link">knowyourmeme.com/memes/hodl</a></li>
                     </ul>
@@ -206,15 +205,17 @@
                         <div class="carousel-track">
                             <div class="carousel-item"><img src="Memes/content.png" alt="Meme 1"></div>
                             <div class="carousel-item"><img src="Memes/content3.png" alt="Meme 2"></div>
-                            <div class="carousel-item"><img src="Memes/ChatGPT_Image_Jan_10_2026_01_09_30_PM.png" alt="Meme 3"></div>
-                            <div class="carousel-item"><img src="Memes/ChatGPT_Image_Jan_10_2026_11_21_04_AM.png" alt="Meme 4"></div>
-                            <div class="carousel-item"><img src="Memes/G-AdYjXXIAAqSTV.png" alt="Meme 5"></div>
-                            <div class="carousel-item"><img src="Memes/G-BGJkjWAAAPOvp.png" alt="Meme 6"></div>
-                            <div class="carousel-item"><img src="Memes/G-GI3DeWcAApqxz.png" alt="Meme 7"></div>
-                            <div class="carousel-item"><img src="Memes/G5fILGYXcAAlisL.png" alt="Meme 8"></div>
-                            <div class="carousel-item"><img src="Memes/G5wo42rWsAAScrG.png" alt="Meme 9"></div>
-                            <div class="carousel-item"><img src="Memes/GwyldEWXMAALhsg.png" alt="Meme 10"></div>
-                            <div class="carousel-item"><img src="Memes/GyJ24LyWwAAkhSH.png" alt="Meme 11"></div>
+                            <div class="carousel-item"><img src="Memes/25345345.png" alt="Meme 3"></div>
+                            <div class="carousel-item"><img src="Memes/ChatGPT_Image_Jan_10_2026_01_09_30_PM.png" alt="Meme 4"></div>
+                            <div class="carousel-item"><img src="Memes/ChatGPT_Image_Jan_10_2026_03_39_22_PM.png" alt="Meme 5"></div>
+                            <div class="carousel-item"><img src="Memes/ChatGPT_Image_Jan_10_2026_11_21_04_AM.png" alt="Meme 6"></div>
+                            <div class="carousel-item"><img src="Memes/ChatGPT_Image_Jan_11_2026_08_45_51_AM.png" alt="Meme 7"></div>
+                            <div class="carousel-item"><img src="Memes/ChatGPT_Image_Jan_11_2026_08_47_35_AM.png" alt="Meme 8"></div>
+                            <div class="carousel-item"><img src="Memes/G-AdYjXXIAAqSTV.png" alt="Meme 9"></div>
+                            <div class="carousel-item"><img src="Memes/G-BGJkjWAAAPOvp.png" alt="Meme 10"></div>
+                            <div class="carousel-item"><img src="Memes/G5wo42rWsAAScrG.png" alt="Meme 11"></div>
+                            <div class="carousel-item"><img src="Memes/GwyldEWXMAALhsg.png" alt="Meme 12"></div>
+                            <div class="carousel-item"><img src="Memes/GyJ24LyWwAAkhSH.png" alt="Meme 13"></div>
                         </div>
                     </div>
                     <button class="carousel-btn next" onclick="moveCarousel(1)">›</button>
@@ -234,7 +235,7 @@
                 <div class="chart-content">
                     <iframe 
                         id="dexscreener-embed" 
-                        src="https://dexscreener.com/solana/5QTuvtRZE3BAc6FrjUMf6yzx6D4HJpLzcRPgrANRVu2X?embed=1&theme=dark&trades=0&info=0" 
+                        src="https://dexscreener.com/solana/BbAD1w6UWRnLMu1hUxy5gvZhGwWiBh8JczwuTDtYpump?embed=1&theme=dark&trades=0&info=0" 
                         style="width: 100%; height: 600px; border: 2px solid rgba(9, 186, 242, 0.4); border-radius: 12px; box-shadow: 0 0 30px rgba(9, 186, 242, 0.3);">
                     </iframe>
                 </div>
