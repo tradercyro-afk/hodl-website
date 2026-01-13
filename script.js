@@ -265,3 +265,195 @@ document.querySelectorAll('.step').forEach(step => {
     step.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(step);
 });
+// ===========================
+// LEADERBOARD FUNCTIONALITY
+// ===========================
+
+async function fetchLeaderboardData() {
+    try {
+        const requestBody = {
+            jsonrpc: '2.0',
+            id: 'leaderboard',
+            method: 'getTokenAccounts',
+            params: {
+                mint: TOKEN_MINT,
+                limit: 1000
+            }
+        };
+
+        const response = await fetch(`https://mainnet.helius-rpc.com/?api-key=${HELIUS_API_KEY}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestBody)
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch leaderboard data');
+        }
+
+        const data = await response.json();
+        
+        if (data.result && data.result.token_accounts) {
+            // Filter non-zero balances and sort by amount
+            const allHolders = data.result.token_accounts
+                .filter(acc => parseFloat(acc.amount) > 0)
+                .map(acc => ({
+                    wallet: acc.owner,
+                    amount: parseFloat(acc.amount) / 1000000, // Convert from smallest unit
+                    holdingTime: 'Loading...'
+                }))
+                .sort((a, b) => b.amount - a.amount);
+            
+            // Skip first wallet (liquidity pool) and take next 25
+            const topHolders = allHolders.slice(1, 26);
+            
+            // Fetch holding time for each holder
+            await Promise.all(topHolders.map(async (holder) => {
+                holder.holdingTime = await getHoldingTime(holder.wallet);
+            }));
+
+            return topHolders;
+        }
+        
+        return [];
+    } catch (error) {
+        console.error('Error fetching leaderboard:', error);
+        return [];
+    }
+}
+
+async function getHoldingTime(walletAddress) {
+    try {
+        // Get token account for this specific wallet and mint
+        const requestBody = {
+            jsonrpc: '2.0',
+            id: 'get-token-account',
+            method: 'getTokenAccountsByOwner',
+            params: [
+                walletAddress,
+                {
+                    mint: TOKEN_MINT
+                },
+                {
+                    encoding: 'jsonParsed'
+                }
+            ]
+        };
+
+        const response = await fetch(`https://mainnet.helius-rpc.com/?api-key=${HELIUS_API_KEY}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestBody)
+        });
+
+        if (!response.ok) {
+            return 'N/A';
+        }
+
+        const data = await response.json();
+        
+        if (data.result && data.result.value && data.result.value.length > 0) {
+            const tokenAccount = data.result.value[0].pubkey;
+            
+            // Get signatures for this specific token account
+            const sigRequestBody = {
+                jsonrpc: '2.0',
+                id: 'get-sigs',
+                method: 'getSignaturesForAddress',
+                params: [
+                    tokenAccount,
+                    {
+                        limit: 1000
+                    }
+                ]
+            };
+
+            const sigResponse = await fetch(`https://mainnet.helius-rpc.com/?api-key=${HELIUS_API_KEY}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(sigRequestBody)
+            });
+
+            if (!sigResponse.ok) {
+                return 'N/A';
+            }
+
+            const sigData = await sigResponse.json();
+            
+            if (sigData.result && sigData.result.length > 0) {
+                // Get the oldest transaction (first purchase)
+                const oldestTx = sigData.result[sigData.result.length - 1];
+                const firstPurchaseTime = oldestTx.blockTime * 1000; // Convert to milliseconds
+                const now = Date.now();
+                const holdingDuration = now - firstPurchaseTime;
+                
+                // Convert to days and hours
+                const days = Math.floor(holdingDuration / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((holdingDuration % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                
+                if (days > 0) {
+                    return `${days}d ${hours}h`;
+                } else if (hours > 0) {
+                    return `${hours}h`;
+                } else {
+                    const minutes = Math.floor(holdingDuration / (1000 * 60));
+                    return `${minutes}m`;
+                }
+            }
+        }
+        
+        return 'N/A';
+    } catch (error) {
+        console.error('Error fetching holding time:', error);
+        return 'N/A';
+    }
+}
+
+function formatWalletAddress(address) {
+    if (!address || address.length < 12) return address;
+    return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
+}
+
+function formatAmount(amount) {
+    if (amount >= 1000000) {
+        return (amount / 1000000).toFixed(2) + 'M';
+    } else if (amount >= 1000) {
+        return (amount / 1000).toFixed(2) + 'K';
+    }
+    return amount.toFixed(2);
+}
+
+async function updateLeaderboard() {
+    const leaderboardBody = document.getElementById('leaderboardBody');
+    
+    if (!leaderboardBody) return;
+    
+    const holders = await fetchLeaderboardData();
+    
+    if (holders.length === 0) {
+        leaderboardBody.innerHTML = '<tr><td colspan="4" class="leaderboard-loading">No data available</td></tr>';
+        return;
+    }
+    
+    leaderboardBody.innerHTML = holders.map((holder, index) => `
+        <tr>
+            <td>${index + 1}</td>
+            <td title="${holder.wallet}">${formatWalletAddress(holder.wallet)}</td>
+            <td>${formatAmount(holder.amount)} $HODL</td>
+            <td>${holder.holdingTime}</td>
+        </tr>
+    `).join('');
+}
+
+// Initialize leaderboard on page load
+document.addEventListener('DOMContentLoaded', () => {
+    updateLeaderboard();
+    // Refresh leaderboard every 30 seconds
+    setInterval(updateLeaderboard, 30000);
+});

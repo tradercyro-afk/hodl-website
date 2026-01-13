@@ -1229,6 +1229,129 @@ header {
     color: #3a3a3a;
 }
 
+/* ===========================
+   LEADERBOARD SECTION
+   =========================== */
+
+.leaderboard-section {
+    padding: 6rem 2rem;
+    background: transparent;
+}
+
+.leaderboard-title {
+    font-size: 2.5rem;
+    font-weight: 400;
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon);
+    text-align: center;
+    margin-bottom: 3rem;
+    text-shadow: 0 0 15px var(--neon-glow-strong), 0 0 30px var(--neon-glow), 0 0 45px rgba(9, 186, 242, 0.4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.leaderboard-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow-x: auto;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(2, 2, 8, 0.8);
+    border: 2px solid rgba(9, 186, 242, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.leaderboard-table thead {
+    background: rgba(9, 186, 242, 0.1);
+}
+
+.leaderboard-table th {
+    padding: 1.5rem 1rem;
+    text-align: left;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--neon);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 2px solid rgba(9, 186, 242, 0.3);
+    text-shadow: 0 0 10px rgba(9, 186, 242, 0.3);
+}
+
+.leaderboard-table th:first-child {
+    width: 80px;
+    text-align: center;
+}
+
+.leaderboard-table th:nth-child(2) {
+    width: 40%;
+}
+
+.leaderboard-table th:nth-child(3),
+.leaderboard-table th:nth-child(4) {
+    width: 30%;
+}
+
+.leaderboard-table tbody tr {
+    border-bottom: 1px solid rgba(9, 186, 242, 0.1);
+    transition: all 0.3s ease;
+}
+
+.leaderboard-table tbody tr:hover {
+    background: rgba(9, 186, 242, 0.05);
+}
+
+.leaderboard-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.leaderboard-table td {
+    padding: 1.2rem 1rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.95rem;
+    color: rgba(9, 186, 242, 0.85);
+}
+
+.leaderboard-table td:first-child {
+    text-align: center;
+    font-weight: 600;
+    color: var(--neon);
+    font-size: 1.1rem;
+}
+
+.leaderboard-table td:nth-child(2) {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: rgba(9, 186, 242, 0.7);
+}
+
+.leaderboard-loading {
+    text-align: center;
+    padding: 3rem !important;
+    color: rgba(9, 186, 242, 0.5);
+    font-style: italic;
+}
+
+/* Top 3 ranks special styling */
+.leaderboard-table tbody tr:nth-child(1) td:first-child {
+    color: #FFD700; /* Gold */
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.leaderboard-table tbody tr:nth-child(2) td:first-child {
+    color: #C0C0C0; /* Silver */
+    text-shadow: 0 0 10px rgba(192, 192, 192, 0.5);
+}
+
+.leaderboard-table tbody tr:nth-child(3) td:first-child {
+    color: #CD7F32; /* Bronze */
+    text-shadow: 0 0 10px rgba(205, 127, 50, 0.5);
+}
+
 /* Footer */
 footer {
     background: #3a3a3a;
