@@ -40,7 +40,7 @@ if (infoItem) {
 // Fetch Market Cap from Dexscreener
 async function fetchMarketCap() {
     try {
-        const response = await fetch('https://api.dexscreener.com/latest/dex/tokens/');
+        const response = await fetch('https://api.dexscreener.com/latest/dex/tokens/FWG3tCsV7UHjEc4ekzVerjHhLACtbaMRegHzn5ECvmUc');
         const data = await response.json();
         
         if (data.pairs && data.pairs.length > 0) {
@@ -76,7 +76,7 @@ async function updateMarketCap() {
 }
 
 // Live Solana Token Holder Count
-const TOKEN_MINT = '';
+const TOKEN_MINT = 'FWG3tCsV7UHjEc4ekzVerjHhLACtbaMRegHzn5ECvmUc';
 const HELIUS_API_KEY = '02135807-dd1a-41f0-be2c-8ae2c389ffb6';
 const UPDATE_INTERVAL = 15000; // 15 seconds
 
